@@ -6,7 +6,7 @@ I couldn't find an existing working way to deploy an interactive AOSP build, deb
 - podman with privileged container deployment (hell no)
 
 None of the options above satisfied my demands, so I made my own. My deployment method is also compatible with SELinux, meaning:
-- you don't need to make SELinux inactive, which is a bad idea because SELinux [provides fine-grained access control and reduces vulnerability to privilege escalation attacks](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/6/html/security-enhanced_linux/chap-Security-Enhanced_Linux-Introduction#sect-Security-Enhanced_Linux-Introduction-Benefits_of_running_SELinux)
+- you don't need to make SELinux inactive, that's is a bad idea because SELinux [provides fine-grained access control and reduces vulnerability to privilege escalation attacks](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/6/html/security-enhanced_linux/chap-Security-Enhanced_Linux-Introduction#sect-Security-Enhanced_Linux-Introduction-Benefits_of_running_SELinux)
 - you don't need to make container privileged, which is a bad idea because this way the privileged container [turns off the security features that isolate the container from the host: dropped capabilities, limited devices, read-only mount points, SELinux separation, and Seccomp filters are all disabled](https://docs.podman.io/en/v4.3/markdown/options/privileged.html)
 - you still can use my deployment method in environments without SELinux and AppArmor
 
