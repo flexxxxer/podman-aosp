@@ -61,6 +61,22 @@ podman exec -it aosp-dev bash
 
 And use your favorite ASfP (Android Studio for Platform) via `~$ asfp` as well as `repo` :)
 
+## Undeploy
+
+For Intel GPUs:
+
+```bash
+envsubst '${XDG_RUNTIME_DIR} ${XAUTHORITY} ${WAYLAND_DISPLAY} ${DISPLAY}' < k8s/full.intel-gpu.yaml | podman kube down -
+```
+
+For AMD GPUs:
+
+```bash
+envsubst '${XDG_RUNTIME_DIR} ${XAUTHORITY} ${WAYLAND_DISPLAY} ${DISPLAY}' < k8s/full.amd-gpu.yaml | podman kube down -
+```
+
+Don't forget about [removing SELinux policy](https://github.com/flexxxxer/podman-aosp/blob/master/notes/selinux.md#remove-selinux-policy) if you created one.
+
 ### Tested
 
 Host OSs:
