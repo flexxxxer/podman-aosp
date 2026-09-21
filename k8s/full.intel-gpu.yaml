@@ -1,0 +1,64 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: aosp-dev
+  labels:
+    app: aosp-dev
+  annotations:
+    io.podman.annotations.userns: keep-id
+    io.podman.annotations.ulimit/aosp-dev: "nofile=8192:524288;nproc=16384:32768"
+spec:
+  restartPolicy: Never
+  hostname: devbox
+  containers:
+    - name: aosp-dev
+      image: localhost/aosp-dev:latest
+      imagePullPolicy: Never
+      command: ["/bin/sh", "-c", "trap 'exit 0' TERM; while :; do sleep 10 & wait; done"]
+      securityContext:
+        allowPrivilegeEscalation: false
+        supplementalGroups: [18, 44, 104]
+        capabilities:
+          drop: ["ALL"]
+      resources:
+        limits:
+          podman.io/device=/dev/kvm: 1
+          podman.io/device=/dev/dri: 1
+      env:
+        - name: HOME
+          value: /home/aosp-dev
+        - name: XDG_SESSION_TYPE
+          value: wayland
+        - name: XDG_RUNTIME_DIR
+          value: /home/aosp-dev/.container-runtime
+        - name: WAYLAND_DISPLAY
+          value: ${WAYLAND_DISPLAY}
+        - name: DISPLAY
+          value: ${DISPLAY}
+        - name: XAUTHORITY
+          value: /home/aosp-dev/.container-runtime/.Xauthority
+      volumeMounts:
+        - name: host-shared
+          mountPath: /home/aosp-dev/host-shared
+        - name: wayland
+          mountPath: /home/aosp-dev/.container-runtime/${WAYLAND_DISPLAY}
+          readOnly: true
+        - name: x11
+          mountPath: /tmp/.X11-unix
+          readOnly: true
+        - name: xauthority
+          mountPath: /home/aosp-dev/.container-runtime/.Xauthority
+          readOnly: true
+        - name: shm
+          mountPath: /dev/shm
+  volumes:
+    - name: host-shared
+      hostPath: { path: ./aosp-dev-shared, type: DirectoryOrCreate }
+    - name: wayland
+      hostPath: { path: ${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY}, type: Socket }
+    - name: x11
+      hostPath: { path: /tmp/.X11-unix, type: Directory }
+    - name: xauthority
+      hostPath: { path: ${XAUTHORITY}, type: File }
+    - name: shm
+      hostPath: { path: /dev/shm, type: Directory }
