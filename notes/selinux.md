@@ -63,18 +63,18 @@ sudo semodule -l | grep aosp_dev
 
 ### Apply SELinux policy to container deployment
 
-It depends on your k8s container deployment file, which depends the GPU vendor.
+It depends on your pod container deployment file, which depends the GPU vendor.
 
 For Intel GPUs:
 
 ```bash
-sed -i 's/^\([[:space:]]*\)securityContext:[[:space:]]*$/\1securityContext:\n\1  seLinuxOptions:\n\1    type: aosp_dev.process/' k8s/full.intel-gpu.yaml
+sed -i 's/^\([[:space:]]*\)securityContext:[[:space:]]*$/\1securityContext:\n\1  seLinuxOptions:\n\1    type: aosp_dev.process/' pods/full.intel-gpu.yaml
 ```
 
 For AMD GPUs:
 
 ```bash
-sed -i 's/^\([[:space:]]*\)securityContext:[[:space:]]*$/\1securityContext:\n\1  seLinuxOptions:\n\1    type: aosp_dev.process/' k8s/full.amd-gpu.yaml
+sed -i 's/^\([[:space:]]*\)securityContext:[[:space:]]*$/\1securityContext:\n\1  seLinuxOptions:\n\1    type: aosp_dev.process/' pods/full.amd-gpu.yaml
 ```
 
 And redeploy via `podman kube play --replace --no-pod-prefix -` as per [README Deploy section](https://github.com/flexxxxer/podman-aosp/blob/master/README.md#deploy). After that ASfP should work fine as well as emulator.

@@ -40,13 +40,13 @@ It depends on your GPU vendor.
 For Intel GPUs:
 
 ```bash
-envsubst '${XDG_RUNTIME_DIR} ${XAUTHORITY} ${WAYLAND_DISPLAY} ${DISPLAY}' < k8s/full.intel-gpu.yaml | podman kube play --replace --no-pod-prefix -
+envsubst '${XDG_RUNTIME_DIR} ${XAUTHORITY} ${WAYLAND_DISPLAY} ${DISPLAY}' < pods/full.intel-gpu.yaml | podman kube play --replace --no-pod-prefix -
 ```
 
 For AMD GPUs:
 
 ```bash
-envsubst '${XDG_RUNTIME_DIR} ${XAUTHORITY} ${WAYLAND_DISPLAY} ${DISPLAY}' < k8s/full.amd-gpu.yaml | podman kube play --replace --no-pod-prefix -
+envsubst '${XDG_RUNTIME_DIR} ${XAUTHORITY} ${WAYLAND_DISPLAY} ${DISPLAY}' < pods/full.amd-gpu.yaml | podman kube play --replace --no-pod-prefix -
 ```
 
 ## SELinux policy
@@ -66,13 +66,13 @@ And use your favorite ASfP (Android Studio for Platform) via `~$ asfp` as well a
 For Intel GPUs:
 
 ```bash
-envsubst '${XDG_RUNTIME_DIR} ${XAUTHORITY} ${WAYLAND_DISPLAY} ${DISPLAY}' < k8s/full.intel-gpu.yaml | podman kube down -
+envsubst '${XDG_RUNTIME_DIR} ${XAUTHORITY} ${WAYLAND_DISPLAY} ${DISPLAY}' < pods/full.intel-gpu.yaml | podman kube down -
 ```
 
 For AMD GPUs:
 
 ```bash
-envsubst '${XDG_RUNTIME_DIR} ${XAUTHORITY} ${WAYLAND_DISPLAY} ${DISPLAY}' < k8s/full.amd-gpu.yaml | podman kube down -
+envsubst '${XDG_RUNTIME_DIR} ${XAUTHORITY} ${WAYLAND_DISPLAY} ${DISPLAY}' < pods/full.amd-gpu.yaml | podman kube down -
 ```
 
 Don't forget about [removing SELinux policy](https://github.com/flexxxxer/podman-aosp/blob/master/notes/selinux.md#remove-selinux-policy) if you created one.
