@@ -61,4 +61,4 @@ spec:
     - name: xauthority
       hostPath: { path: ${XAUTHORITY}, type: File }
     - name: shm
-      hostPath: { path: /dev/shm, type: Directory }
+      emptyDir: { medium: Memory }
