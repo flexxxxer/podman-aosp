@@ -1,6 +1,6 @@
 # Why?
 
-I couldn't find an existing working way to deploy an interactive AOSP build, debug, and test environment using a rootless container with podman. Specifically, with working ASfP (Android Studio for Platform) and emulator. The existing solutions come down to:
+I couldn't find an existing working way to deploy an interactive AOSP development, build, and testing environment. Specifically, with working ASfP (Android Studio for Platform) and emulator. The existing solutions come down to:
 - docker (thanks, no, podman is more secure)
 - docker with privileged container deployment (hell no)
 - podman with privileged container deployment (hell no)
