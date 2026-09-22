@@ -5,7 +5,6 @@ metadata:
   labels:
     app: aosp-dev
   annotations:
-    io.podman.annotations.userns: keep-id
     io.podman.annotations.ulimit/aosp-dev: "nofile=8192:524288;nproc=16384:32768"
 spec:
   restartPolicy: Never
