@@ -35,19 +35,15 @@ podman build --squash \
 
 ## Deploy
 
-It depends on your GPU vendor.
-
-For Intel GPUs:
-
-```bash
-envsubst '${XDG_RUNTIME_DIR} ${XAUTHORITY} ${WAYLAND_DISPLAY} ${DISPLAY}' < pods/full.intel-gpu.yaml | podman kube play --replace --no-pod-prefix -
-```
-
-For AMD GPUs:
-
-```bash
-envsubst '${XDG_RUNTIME_DIR} ${XAUTHORITY} ${WAYLAND_DISPLAY} ${DISPLAY}' < pods/full.amd-gpu.yaml | podman kube play --replace --no-pod-prefix -
-```
+It depends on your GPU vendor:
+- For Intel GPUs:
+  ```bash
+  envsubst '${XDG_RUNTIME_DIR} ${XAUTHORITY} ${WAYLAND_DISPLAY} ${DISPLAY}' < pods/full.intel-gpu.yaml | podman kube play --replace --no-pod-prefix -
+  ```
+- For AMD GPUs:
+  ```bash
+  envsubst '${XDG_RUNTIME_DIR} ${XAUTHORITY} ${WAYLAND_DISPLAY} ${DISPLAY}' < pods/full.amd-gpu.yaml | podman kube play --replace --no-pod-prefix -
+  ```
 
 ## SELinux policy
 
